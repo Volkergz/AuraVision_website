@@ -112,7 +112,7 @@ export const siteConfig: SiteConfig = {
   ---------------------------------------------------------- */
   site: {
     name: 'AuraVisión',
-    url: 'https://auravision.vercel.app',
+    url: 'https://aura-vision-website.vercel.app',
     description:
       'AuraVisión: lentes inteligentes con sensores ultrasónicos y retroalimentación háptica que complementan el bastón blanco para una movilidad más autónoma y segura.',
     favicon: '/images/isotipo.png',
