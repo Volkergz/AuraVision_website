@@ -1,0 +1,148 @@
+---
+import { siteConfig } from '../config/site.config';
+
+const { about } = siteConfig;
+---
+
+<section class="section" id="proyecto">
+  <div class="container">
+    <h2 class="section-title">El proyecto</h2>
+    <p class="section-subtitle">Conoce qué es AuraVisión y el problema que buscamos resolver.</p>
+
+    <div class="about__summary aura-card">
+      <p>{about.summary}</p>
+    </div>
+
+    <div class="about__grid">
+      <article class="aura-card">
+        <h3 class="about__heading">El problema</h3>
+        <p>{about.problem}</p>
+      </article>
+
+      <article class="aura-card">
+        <h3 class="about__heading">Nuestra propuesta de valor</h3>
+        <ul class="about__list">
+          {
+            about.valueProposition.map((item) => (
+              <li>{item}</li>
+            ))
+          }
+        </ul>
+      </article>
+    </div>
+
+    <div class="about__stats">
+      {
+        about.stats.map((stat) => (
+          <div class="aura-card about__stat">
+            <span class="about__stat-value">{stat.value}</span>
+            <span class="about__stat-label">{stat.label}</span>
+          </div>
+        ))
+      }
+    </div>
+
+    <h3 class="about__block-title">Tecnologías principales</h3>
+    <div class="about__grid about__grid--tech">
+      {
+        about.technologies.map((tech) => (
+          <article class="aura-card">
+            <h4 class="about__tech-name">{tech.name}</h4>
+            <p>{tech.detail}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <h3 class="about__block-title">Impacto esperado</h3>
+    <div class="about__impact">
+      <div class="aura-card">
+        <h4 class="about__impact-label">Corto plazo</h4>
+        <p>{about.impactShort}</p>
+      </div>
+      <div class="aura-card">
+        <h4 class="about__impact-label">Mediano plazo</h4>
+        <p>{about.impactMedium}</p>
+      </div>
+      <div class="aura-card">
+        <h4 class="about__impact-label">Largo plazo</h4>
+        <p>{about.impactLong}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__summary {
+    font-size: 1.1rem;
+    margin-bottom: var(--gap-lg);
+  }
+
+  .about__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--gap-md);
+    margin-bottom: var(--gap-lg);
+  }
+
+  .about__heading {
+    color: var(--aura-purple-light);
+    margin-bottom: 0.75rem;
+  }
+
+  .about__list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .about__list li::marker {
+    color: var(--aura-purple);
+  }
+
+  .about__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--gap-md);
+    margin-bottom: var(--gap-lg);
+  }
+
+  .about__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.35rem;
+    padding-block: 2rem;
+  }
+
+  .about__stat-value {
+    font-family: var(--font-brand);
+    font-size: 2rem;
+    color: var(--aura-purple-light);
+    text-shadow: var(--glow-purple);
+  }
+
+  .about__stat-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .about__block-title {
+    margin-top: var(--gap-lg);
+    margin-bottom: var(--gap-md);
+  }
+
+  .about__tech-name {
+    color: var(--aura-purple-light);
+  }
+
+  .about__impact {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--gap-md);
+  }
+
+  .about__impact-label {
+    color: var(--aura-purple-light);
+  }
+</style>

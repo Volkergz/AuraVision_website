@@ -1,0 +1,35 @@
+---
+import Icon from './Icon.astro';
+import { siteConfig } from '../config/site.config';
+
+const { contact } = siteConfig;
+---
+
+<section class="section" id="contacto">
+  <div class="container">
+    <div class="contact__card aura-card">
+      <h2 class="section-title">{contact.heading}</h2>
+      <p class="contact__text">{contact.text}</p>
+      <a class="aura-btn" href={`mailto:${contact.email}`}>
+        <Icon name="mail" size={18} />
+        {contact.ctaLabel}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact__card {
+    max-width: 720px;
+    margin-inline: auto;
+    text-align: center;
+    padding-block: var(--gap-lg);
+  }
+
+  .contact__text {
+    color: var(--text-muted);
+    max-width: 52ch;
+    margin-inline: auto;
+    margin-bottom: var(--gap-md);
+  }
+</style>

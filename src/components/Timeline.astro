@@ -1,0 +1,214 @@
+---
+import Modal from './Modal.astro';
+import { siteConfig } from '../config/site.config';
+
+const items = siteConfig.timeline;
+---
+
+<section class="section timeline-section" id="cronologia">
+  <div class="container">
+    <h2 class="section-title">Cronología</h2>
+    <p class="section-subtitle">
+      Los avances del proyecto, hito a hito. Pasa el cursor sobre un punto para ver un resumen y haz
+      clic en una tarjeta para abrir el detalle.
+    </p>
+
+    <ol class="timeline">
+      {
+        items.map((item, index) => (
+          <li class="timeline__item">
+            <div class="timeline__dot">
+              <span class="timeline__tooltip" role="tooltip">{item.description}</span>
+            </div>
+
+            <div
+              class:list={['timeline__content', index % 2 === 0 ? 'timeline__content--left' : 'timeline__content--right']}
+              data-modal-open={index}
+              tabindex="0"
+              role="button"
+              aria-haspopup="dialog"
+            >
+              <span class="timeline__date">{item.date}</span>
+              <h3 class="timeline__title">{item.title}</h3>
+              <p class="timeline__brief">{item.description}</p>
+            </div>
+
+            <Modal id={`timeline-modal-${index}`} item={item} />
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Línea central */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    background: linear-gradient(180deg, transparent, var(--aura-purple) 12%, var(--aura-purple) 88%, transparent);
+    box-shadow: var(--glow-purple);
+  }
+
+  .timeline__item {
+    position: relative;
+    min-height: 11rem;
+  }
+
+  /* Punto */
+  .timeline__dot {
+    position: absolute;
+    top: 0.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    background: var(--black);
+    border: 3px solid var(--aura-purple);
+    box-shadow: var(--glow-purple);
+    cursor: pointer;
+    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s var(--ease);
+    z-index: 2;
+  }
+
+  .timeline__dot:hover,
+  .timeline__dot:focus-visible {
+    transform: translateX(-50%) scale(1.25);
+    background: var(--aura-purple);
+    box-shadow: var(--glow-purple-strong);
+    outline: none;
+  }
+
+  /* Tooltip */
+  .timeline__tooltip {
+    position: absolute;
+    bottom: calc(100% + 0.75rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 260px;
+    padding: 0.6rem 0.85rem;
+    background: var(--surface-card);
+    border: var(--border-aura);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--glow-purple);
+    font-size: 0.85rem;
+    color: var(--white);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s var(--ease), visibility 0.2s var(--ease), transform 0.2s var(--ease);
+    z-index: 3;
+  }
+
+  .timeline__dot:hover .timeline__tooltip,
+  .timeline__dot:focus-visible .timeline__tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-4px);
+  }
+  .timeline__content {
+    position: relative;
+    width: calc(50% - 3.25rem);
+    padding: 1.75rem 2rem;
+    background: var(--surface-card);
+    border: var(--border-aura);
+    border-radius: var(--radius-md);
+    box-shadow: var(--glow-purple);
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    margin-bottom: var(--gap-md);
+    cursor: pointer;
+  }
+
+  .timeline__content:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--glow-purple-strong);
+  }
+
+  .timeline__content--left {
+    margin-right: auto;
+  }
+
+  .timeline__content--right {
+    margin-left: auto;
+  }
+
+  .timeline__date {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--aura-purple-light);
+  }
+
+  .timeline__title {
+    font-size: 1.15rem;
+    margin: 0.35rem 0 0.5rem;
+  }
+
+  .timeline__brief {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 820px) {
+    .timeline::before {
+      left: 0.8rem;
+    }
+
+    .timeline__dot {
+      left: 0.8rem;
+    }
+
+    .timeline__content {
+      width: calc(100% - 2.75rem);
+      margin-left: 2.75rem;
+    }
+
+    .timeline__content--left,
+    .timeline__content--right {
+      margin-right: 0;
+      margin-left: 2.75rem;
+    }
+  }
+</style>
+
+<script>
+  const dots = document.querySelectorAll('[data-modal-open]');
+  dots.forEach((dot, index) => {
+    const openModal = () => {
+      const modal = document.getElementById(`timeline-modal-${index}`);
+      if (modal) modal.showModal();
+    };
+    dot.addEventListener('click', openModal);
+    dot.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openModal();
+      }
+    });
+  });
+
+  document.querySelectorAll('dialog.modal').forEach((modal) => {
+    const closeBtn = modal.querySelector('[data-modal-close]');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => modal.close());
+    }
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) modal.close();
+    });
+  });
+</script>

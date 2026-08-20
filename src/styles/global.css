@@ -1,0 +1,298 @@
+/* ============================================================
+   AuraVisión — Estilos globales
+   Tema dark. Paleta oficial según Docs/visual-style.md.
+   ============================================================ */
+
+/* --- 1. Variables de la paleta oficial --- */
+:root {
+  /* Colores oficiales */
+  --aura-purple: #7c2ab2;
+  --deep-violet: #311d42;
+  --white: #ffffff;
+  --black: #000000;
+
+  /* Derivados de la paleta (complementarios) */
+  --aura-purple-dark: #5a1f85;
+  --aura-purple-light: #a04fd6;
+  --deep-violet-soft: #3d2752;
+  --deep-violet-bg: #1a0f24;
+  --surface: #120a1b;
+  --surface-card: #1b1126;
+  --text-muted: rgba(255, 255, 255, 0.72);
+
+  /* Tipografías */
+  --font-brand: 'Neuropolitical', 'Space Grotesk', sans-serif;
+  --font-body: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+
+  /* Glow y bordes */
+  --glow-purple: 0 0 12px rgba(124, 42, 178, 0.55), 0 0 28px rgba(124, 42, 178, 0.3);
+  --glow-purple-strong: 0 0 16px rgba(124, 42, 178, 0.7), 0 0 40px rgba(124, 42, 178, 0.4);
+  --border-aura: 1px solid var(--aura-purple);
+  --border-aura-thick: 2px solid var(--aura-purple);
+
+  /* Radios */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* Layout */
+  --container-max: 1120px;
+  --container-pad: clamp(1.25rem, 4.5vw, 3rem);
+  --section-gap: clamp(3rem, 7vw, 5rem);
+  --gap-sm: 1.5rem;
+  --gap-md: 2rem;
+  --gap-lg: 3rem;
+
+  /* Transiciones */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- 2. Fuente de marca (Neuropolitical, opcional local) --- */
+@font-face {
+  font-family: 'Neuropolitical';
+  src: url('/fonts/neuropolitical.otf') format('opentype'),
+    url('/fonts/neuropolitical.ttf') format('truetype');
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* --- 3. Reset y base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-brand);
+  line-height: 1.15;
+  margin: 0 0 0.75em;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--aura-purple-light);
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+}
+
+a:hover {
+  color: var(--white);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--aura-purple);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--aura-purple);
+  color: var(--white);
+}
+
+/* Scrollbar (dark) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--aura-purple-dark);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--aura-purple);
+}
+
+/* --- 4. Utilidades reutilizables --- */
+
+/* Cards con borde Morado Aura + glow */
+.aura-card {
+  background: var(--surface-card);
+  border: var(--border-aura);
+  border-radius: var(--radius-md);
+  box-shadow: var(--glow-purple);
+  padding: 2rem;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+
+.aura-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glow-purple-strong);
+}
+
+/* Botones con borde Morado Aura + glow */
+.aura-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  font-family: var(--font-brand);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--aura-purple-dark), var(--aura-purple));
+  border: var(--border-aura);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--glow-purple);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease),
+    background 0.2s var(--ease);
+}
+
+.aura-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-purple-strong);
+  background: linear-gradient(135deg, var(--aura-purple), var(--aura-purple-light));
+  color: var(--white);
+}
+
+.aura-btn:active {
+  transform: translateY(0);
+}
+
+/* Variante outline (transparente) */
+.aura-btn--outline {
+  background: transparent;
+  color: var(--aura-purple-light);
+}
+
+.aura-btn--outline:hover {
+  background: rgba(124, 42, 178, 0.12);
+}
+
+/* Título de sección */
+.section-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: 0.5em;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  max-width: 60ch;
+  margin-bottom: var(--gap-lg);
+}
+
+/* --- 5. Fondo con líneas/ondas decorativas (futurista) --- */
+body {
+  background-image:
+    radial-gradient(circle at 20% -10%, rgba(124, 42, 178, 0.18), transparent 45%),
+    radial-gradient(circle at 85% 15%, rgba(124, 42, 178, 0.12), transparent 40%),
+    radial-gradient(circle at 50% 110%, rgba(49, 29, 66, 0.55), transparent 55%),
+    linear-gradient(180deg, var(--black) 0%, var(--surface) 100%);
+  background-attachment: fixed;
+}
+
+/* Ondas SVG como patrón de fondo (helper .bg-waves) */
+.bg-waves {
+  position: relative;
+  isolation: isolate;
+}
+
+.bg-waves::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='200' viewBox='0 0 600 200'%3E%3Cpath d='M0 100 Q 75 40 150 100 T 300 100 T 450 100 T 600 100' fill='none' stroke='%237C2AB2' stroke-opacity='0.12' stroke-width='2'/%3E%3Cpath d='M0 130 Q 75 70 150 130 T 300 130 T 450 130 T 600 130' fill='none' stroke='%237C2AB2' stroke-opacity='0.07' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-size: 600px 200px;
+  background-repeat: repeat-x;
+  background-position: bottom;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Contenedor de sección */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.section {
+  padding-block: var(--section-gap);
+  position: relative;
+}
+
+/* Texto de marca (logotipo) */
+.brand-text {
+  font-family: var(--font-brand);
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.brand-text .brand-aura {
+  color: var(--white);
+}
+
+.brand-text .brand-vision {
+  color: var(--aura-purple);
+}
+
+/* Visibilidad con preferencia de movimiento reducida */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* Responsive base */
+@media (max-width: 640px) {
+  body {
+    font-size: 0.95rem;
+  }
+}

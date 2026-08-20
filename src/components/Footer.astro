@@ -1,0 +1,113 @@
+---
+import Imagotipo from './Imagotipo.astro';
+import { siteConfig } from '../config/site.config';
+
+const { footer } = siteConfig;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="#inicio" class="footer__imagotipo" aria-label="AuraVisión, ir al inicio">
+        <Imagotipo size={120} />
+      </a>
+      <p class="footer__desc">{footer.description}</p>
+    </div>
+
+    <nav class="footer__nav" aria-label="Enlaces rápidos">
+      <p class="footer__label">Enlaces rápidos</p>
+      <ul class="footer__links">
+        {
+          footer.quickLinks.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container">
+      <p>© {year} {footer.copyright}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: var(--border-aura);
+    box-shadow: var(--glow-purple);
+    background: rgba(0, 0, 0, 0.6);
+    margin-top: var(--section-gap);
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--gap-lg);
+    padding-block: var(--gap-lg);
+  }
+
+  .footer__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer__imagotipo {
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .footer__desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    max-width: 45ch;
+    margin-top: 0.5rem;
+    margin-inline: auto;
+  }
+
+  .footer__label {
+    font-family: var(--font-brand);
+    color: var(--aura-purple-light);
+    margin-bottom: 0.75rem;
+  }
+
+  .footer__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .footer__links a {
+    color: var(--text-muted);
+  }
+
+  .footer__links a:hover {
+    color: var(--aura-purple-light);
+  }
+
+  .footer__bottom {
+    border-top: 1px solid var(--aura-purple-dark);
+    padding-block: 1rem;
+  }
+
+  .footer__bottom p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,13 @@
+# Secrets
+.env
+
+# Dependencias y build
+node_modules/
+dist/
+
+# Cache de Astro / Vite
+.astro/
+.vite/
+
+# Sistemas
+.DS_Store

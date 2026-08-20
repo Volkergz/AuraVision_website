@@ -1,0 +1,159 @@
+---
+import Icon from './Icon.astro';
+import type { TimelineItem } from '../config/site.config';
+
+interface Props {
+  id: string;
+  item: TimelineItem;
+}
+
+const { id, item } = Astro.props;
+const titleId = `${id}-title`;
+---
+
+<dialog class="modal" id={id} aria-labelledby={titleId} aria-modal="true">
+  <div class="modal__box">
+    <button class="modal__close" type="button" data-modal-close aria-label="Cerrar detalle">
+      <Icon name="close" size={22} />
+    </button>
+
+    <p class="modal__date">{item.date}</p>
+    <h3 class="modal__title" id={titleId}>{item.title}</h3>
+    <p class="modal__detail">{item.detail ?? item.description}</p>
+
+    {
+      item.photos.length > 0 && (
+        <div class="modal__photos">
+          {
+            item.photos.map((photo) => (
+              <figure class="modal__figure">
+                <img src={photo.src} alt={photo.alt} loading="lazy" />
+                <figcaption>{photo.description}</figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      )
+    }
+
+    {
+      item.links.length > 0 && (
+        <div class="modal__links">
+          {
+            item.links.map((link) => (
+              <a class="aura-btn aura-btn--outline modal__link" href={link.href} target="_blank" rel="noopener noreferrer">
+                <Icon name="external" size={16} />
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
+      )
+    }
+  </div>
+</dialog>
+
+<style>
+  .modal {
+    border: none;
+    padding: 0;
+    max-width: min(760px, 92vw);
+    width: 100%;
+    background: transparent;
+    color: var(--white);
+  }
+
+  .modal::backdrop {
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .modal__box {
+    position: relative;
+    background: var(--surface-card);
+    border: var(--border-aura-thick);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glow-purple-strong);
+    padding: 2rem 2rem 2.25rem;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: var(--border-aura);
+    color: var(--white);
+    cursor: pointer;
+    transition: background 0.2s var(--ease), box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
+  }
+
+  .modal__close:hover {
+    background: rgba(124, 42, 178, 0.18);
+    box-shadow: var(--glow-purple);
+    transform: rotate(90deg);
+  }
+
+  .modal__date {
+    color: var(--aura-purple-light);
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal__title {
+    margin-bottom: 1rem;
+  }
+
+  .modal__detail {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .modal__photos {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal__figure {
+    margin: 0;
+    background: var(--surface);
+    border: 1px solid var(--aura-purple-dark);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .modal__figure img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .modal__figure figcaption {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--aura-purple-dark);
+  }
+
+  .modal__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .modal__link {
+    font-size: 0.85rem;
+  }
+</style>

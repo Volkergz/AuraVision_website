@@ -1,0 +1,112 @@
+---
+import Icon from './Icon.astro';
+import { siteConfig } from '../config/site.config';
+
+const collaborators = siteConfig.collaborators;
+---
+
+<section class="section" id="colaboradores">
+  <div class="container">
+    <h2 class="section-title">Colaboradores</h2>
+    <p class="section-subtitle">El equipo detrás de AuraVisión.</p>
+
+    {
+      collaborators.length > 0 ? (
+        <div class="collab__grid">
+          {
+            collaborators.map((person) => (
+              <article class="aura-card collab__card">
+                <div class="collab__avatar">
+                  <img src={person.photo} alt={`Foto de ${person.name}`} loading="lazy" onerror="this.style.display='none'" />
+                </div>
+                <h3 class="collab__name">{person.name}</h3>
+                <p class="collab__role">{person.role}</p>
+                <div class="collab__links">
+                  <a class="collab__link" href={person.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`LinkedIn de ${person.name}`}>
+                    <Icon name="linkedin" size={20} />
+                  </a>
+                  {
+                    person.github && (
+                      <a class="collab__link" href={person.github} target="_blank" rel="noopener noreferrer" aria-label={`GitHub de ${person.name}`}>
+                        <Icon name="github" size={20} />
+                      </a>
+                    )
+                  }
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      ) : (
+        <p class="section-subtitle">Aún no hay colaboradores registrados.</p>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .collab__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--gap-md);
+  }
+
+  .collab__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.25rem;
+  }
+
+  .collab__avatar {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: var(--border-aura-thick);
+    box-shadow: var(--glow-purple);
+    background: var(--deep-violet-bg);
+    margin-bottom: 1.25rem;
+  }
+
+  .collab__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .collab__name {
+    margin-bottom: 0.35rem;
+  }
+
+  .collab__role {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .collab__links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .collab__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-sm);
+    border: var(--border-aura);
+    color: var(--white);
+    transition: background 0.2s var(--ease), box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
+  }
+
+  .collab__link:hover {
+    background: rgba(124, 42, 178, 0.18);
+    box-shadow: var(--glow-purple);
+    transform: translateY(-2px);
+    color: var(--white);
+  }
+</style>
