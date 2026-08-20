@@ -12,12 +12,14 @@
 
 - **Fuente principal (marca y títulos): `Neuropolitical`**
   _(La fuente oficial de la marca. Se usará para el logotipo y títulos principales.)_
+  - Archivo incluido en el repo: `public/fonts/neuropolitical.otf` (aplicado vía `@font-face`).
+  - Fallback web: **Space Grotesk** (Google Fonts) mientras no cargue la fuente local.
 
 ### Isotipo
 
-- **Isotipo:** _[Pendiente de subir]_
-  - Ubicación: `public/images/isotipo.png` (cuando esté disponible).
-  - Formato sugerido: PNG con fondo transparente.
+- **Isotipo:** subido por el usuario.
+  - Ubicación: `public/images/isotipo.webp` (WebP con fondo transparente).
+  - También disponible el original PNG (reemplazable; luego optimizar con `npm run optimize:images`).
 
 ### Logotipo
 
@@ -57,8 +59,8 @@ como elementos decorativos de fondo.
 
 ## 5. Tipografía (web)
 
-- Fuente principal (títulos): `Neuropolitical` _(oficial de marca; evaluar fallback/web font si no está disponible en web)_
-- Fuente secundaria (texto): _por definir_
+- Fuente principal (títulos): `Neuropolitical` _(archivo local en `public/fonts/`, fallback Space Grotesk)_
+- Fuente secundaria (texto): **Space Grotesk** (Google Fonts)
 
 ## 6. Estilo de componentes
 
@@ -79,10 +81,10 @@ Las cards de colaboradores deben contener:
 
 ## 8. Imágenes
 
-- Formato de logos/fotos: `ej: PNG con fondo transparente`
-- Isotipo: _pendiente de subir_ → `public/images/isotipo.png`
-- Estilo de fotos de colaboradores: `ej: cuadradas/circulares, 512x512px`
-- Imágenes de eventos: `ej: 16:9, 1280x720px`
+- Formato de imágenes: **WebP** (optimización automática con `npm run optimize:images`).
+- Isotipo: subido → `public/images/isotipo.webp` (con transparencia).
+- Fotos de colaboradores: `public/images/colaboradores/*.webp` (redimensionadas a 256px, mostradas en círculos de 128px).
+- Fotos de hitos: `public/images/hitos/hito-N-img-M.webp` (redimensionadas a 1600px, mostradas en 16:9 dentro del modal).
 
 ## 9. Referencias de inspiración
 

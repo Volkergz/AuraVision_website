@@ -19,12 +19,12 @@ información del proyecto, cronología de avances, eventos asistidos, colaborado
 2. Navbar y Hero.
 3. About (información del proyecto).
 4. Timeline (cronología) + Modal.
-5. Events.
+5. ~~Events~~ (sección eliminada; los eventos viven en el timeline).
 6. Collaborators.
 7. Contact.
 8. Footer.
-9. Política de imágenes y contenido.
-10. Verificación final (build) y deploy.
+9. Política de imágenes y contenido (optimización a WebP).
+10. Verificación final (build) y deploy (Vercel).
 
 ---
 
@@ -58,7 +58,7 @@ información del proyecto, cronología de avances, eventos asistidos, colaborado
 
 | Campo       | Detalle                                                        |
 | ----------- | -------------------------------------------------------------- |
-| Descripción | ÚNICA fuente de contenido editable. Agrupa: datos del sitio, hero, about, timeline (hitos), events, collaborators, contact y footer. |
+| Descripción | ÚNICA fuente de contenido editable. Agrupa: datos del sitio, hero, about, timeline (hitos), collaborators, contact y footer. |
 | Alcance     | Todo el texto y rutas de imágenes de la página.                |
 | R-Asociados | R-11, R-12, R-21 |
 
@@ -67,7 +67,7 @@ información del proyecto, cronología de avances, eventos asistidos, colaborado
 | Campo       | Detalle                                                        |
 | ----------- | -------------------------------------------------------------- |
 | Descripción | Barra de navegación fija superior. Logo AuraVisión (con el estilo del logotipo: "Aura" + "Visión") y enlaces ancla a las secciones. Menú responsive. |
-| Alcance     | Anclas: Inicio, Proyecto, Cronología, Eventos, Colaboradores, Contacto. |
+| Alcance     | Anclas: Inicio, Proyecto, Cronología, Colaboradores, Contacto. |
 | R-Asociados | R-5, R-18, R-19, R-20 |
 
 ### M-6. Hero
@@ -82,7 +82,7 @@ información del proyecto, cronología de avances, eventos asistidos, colaborado
 
 | Campo       | Detalle                                                        |
 | ----------- | -------------------------------------------------------------- |
-| Descripción | Sección con la información del proyecto: qué es AuraVisión, problema que resuelve, solución/propuesta de valor, tecnologías e impacto. Puede incluir métricas clave (stats). |
+| Descripción | Sección con la información del proyecto: qué es AuraVisión, problema que resuelve, solución/propuesta de valor e impacto. Puede incluir métricas clave (stats). *(La sub-sección "Tecnologías principales" fue eliminada a petición del usuario.)* |
 | Alcance     | Datos de `Docs/proyect-context.md` (secciones 3 a 10).         |
 | R-Asociados | R-6, R-21 |
 
@@ -90,7 +90,7 @@ información del proyecto, cronología de avances, eventos asistidos, colaborado
 
 | Campo       | Detalle                                                        |
 | ----------- | -------------------------------------------------------------- |
-| Descripción | Línea de tiempo con puntos. Cada punto muestra el nombre del evento/hito arriba o abajo. **Hover** = descripción breve (tooltip). **Click** = abre un Modal con detalle extenso. |
+| Descripción | Línea de tiempo con puntos. Cada punto muestra el nombre del evento/hito arriba o abajo. **Click** = abre un Modal con detalle extenso. *(El tooltip de hover fue eliminado a petición del usuario.)* |
 | Alcance     | Datos de hitos: fecha, nombre, descripción breve, detalle, fotografías (cada una con descripción) y enlaces externos opcionales. |
 | R-Asociados | R-7, R-12 |
 
@@ -136,15 +136,15 @@ información del proyecto, cronología de avances, eventos asistidos, colaborado
 | Campo       | Detalle                                                        |
 | ----------- | -------------------------------------------------------------- |
 | Descripción | Componente de íconos SVG reutilizable: LinkedIn, GitHub, Instagram, mail, etc. (no dependencias externas para mantener la capa gratuita). |
-| Alcance     | Íconos usados en navbar, colaboradores, eventos y footer.      |
+| Alcance     | Íconos usados en navbar, colaboradores, contact y footer. |
 | R-Asociados | R-9 |
 
 ### M-15. Imágenes (`public/images/`)
 
 | Campo       | Detalle                                                        |
 | ----------- | -------------------------------------------------------------- |
-| Descripción | Carpeta con imágenes de nombres fijos y documentados para reemplazo simple: `isotipo.png`, `evento-1.jpg`, `colaborador-1.jpg`, etc. |
-| Alcance     | Logo/isotipo, fotografías de eventos y colaboradores.          |
+| Descripción | Carpeta con imágenes de nombres fijos y documentados para reemplazo simple. Todas en **WebP** (`isotipo.webp`, `hitos/hito-N-img-M.webp`, `colaboradores/<nombre>.webp`). Optimización automática con `npm run optimize:images` (redimensiona a 1600px en hitos, 256px en colaboradores y comprime). |
+| Alcance     | Logo/isotipo, fotografías de hitos y colaboradores.          |
 | R-Asociados | R-12, R-19 |
 
 ---
@@ -155,16 +155,19 @@ información del proyecto, cronología de avances, eventos asistidos, colaborado
 - [ ] `npm run build` pasa sin errores.
 - [ ] Tema dark, bordes morado + glow, tipografía y paleta según `visual-style.md`.
 - [ ] Contenido editable desde `src/config/site.config.ts` sin tocar componentes.
-- [ ] Imágenes reemplazables copiando archivos en `public/images/`.
+- [ ] Imágenes reemplazables copiando archivos en `public/images/` (WebP vía `npm run optimize:images`).
 - [ ] `Docs/requirements.md` actualizado (estados Completado / No Completado).
-- [ ] Deploy verificado en Vercel (capa gratuita).
+- [ ] Deploy verificado en Vercel (capa gratuita). Producción: https://aura-vision-website.vercel.app/
 
 ---
 
 ## 5. Notas de arquitectura
 
 - **Sin dependencias externas de JS** donde sea posible (Astro hidrata solo lo
-  necesario; el Modal puede usar JS propio pequeño o vanilla).
+  necesario; el Modal usa JS vanilla propio).
 - **SEO básico:** meta tags, Open Graph y `lang="es"`.
-- **Accesibilidad:** uso de `aria` en el modal, tooltips accesibles y alternativas
-  de texto para imágenes.
+- **Accesibilidad:** uso de `aria` en el modal (opciones de texto alternativo
+  para imágenes).
+- **Rendimiento:** imágenes 100% WebP, redimensionadas (hitos 1600px,
+  colaboradores 256px) y con `loading="lazy"`; script `npm run optimize:images`
+  para re-optimizar.

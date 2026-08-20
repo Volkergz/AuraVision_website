@@ -9,17 +9,14 @@ const items = siteConfig.timeline;
   <div class="container">
     <h2 class="section-title">Cronología</h2>
     <p class="section-subtitle">
-      Los avances del proyecto, hito a hito. Pasa el cursor sobre un punto para ver un resumen y haz
-      clic en una tarjeta para abrir el detalle.
+      Los avances del proyecto, hito a hito. Haz clic en una tarjeta para abrir el detalle.
     </p>
 
     <ol class="timeline">
       {
         items.map((item, index) => (
           <li class="timeline__item">
-            <div class="timeline__dot">
-              <span class="timeline__tooltip" role="tooltip">{item.description}</span>
-            </div>
+            <div class="timeline__dot"></div>
 
             <div
               class:list={['timeline__content', index % 2 === 0 ? 'timeline__content--left' : 'timeline__content--right']}
@@ -92,34 +89,6 @@ const items = siteConfig.timeline;
     outline: none;
   }
 
-  /* Tooltip */
-  .timeline__tooltip {
-    position: absolute;
-    bottom: calc(100% + 0.75rem);
-    left: 50%;
-    transform: translateX(-50%);
-    width: max-content;
-    max-width: 260px;
-    padding: 0.6rem 0.85rem;
-    background: var(--surface-card);
-    border: var(--border-aura);
-    border-radius: var(--radius-sm);
-    box-shadow: var(--glow-purple);
-    font-size: 0.85rem;
-    color: var(--white);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.2s var(--ease), visibility 0.2s var(--ease), transform 0.2s var(--ease);
-    z-index: 3;
-  }
-
-  .timeline__dot:hover .timeline__tooltip,
-  .timeline__dot:focus-visible .timeline__tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(-4px);
-  }
   .timeline__content {
     position: relative;
     width: calc(50% - 3.25rem);

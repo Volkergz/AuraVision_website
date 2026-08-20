@@ -33,16 +33,10 @@ export interface Stat {
   label: string;
 }
 
-export interface Technology {
-  name: string;
-  detail: string;
-}
-
 export interface AboutContent {
   summary: string;
   problem: string;
   valueProposition: string[];
-  technologies: Technology[];
   impactShort: string;
   impactMedium: string;
   impactLong: string;
@@ -160,24 +154,6 @@ export const siteConfig: SiteConfig = {
       'Mayor seguridad: previene accidentes al detectar obstáculos en tiempo real, complementando el uso del bastón blanco.',
       'Información de calidad, obtenida a través de organizaciones como SENADIS, la biblioteca central para ciegos y la ONCE.',
       'Prototipo probado con usuarios reales, cuyo feedback ha permitido crear una solución más humana, accesible y eficiente.',
-    ],
-    technologies: [
-      {
-        name: 'Microcontrolador Seeed Studio XIAO ESP32-S3 Sense',
-        detail: 'Procesa la información de los sensores, ejecuta los algoritmos y controla los componentes.',
-      },
-      {
-        name: 'Sensores ultrasónicos',
-        detail: 'Detección de obstáculos a diferentes alturas y distancias.',
-      },
-      {
-        name: 'Motor vibrador PWM Switch DC',
-        detail: 'Retroalimentación háptica.',
-      },
-      {
-        name: 'Software de visualización y monitoreo',
-        detail: 'Monitoreo en tiempo real del estado del dispositivo (batería, conexión y temperatura).',
-      },
     ],
     impactShort:
       'Reducir el riesgo de incidentes en la movilidad diaria y fortalecer la seguridad personal, especialmente por la noche o en condiciones adversas.',

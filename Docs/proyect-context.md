@@ -151,9 +151,9 @@ universal y los derechos humanos, consolidando un aporte al desarrollo social de
 
 ## 12. Links relevantes
 
-- Demo / sitio web:
-- Repositorio (GitHub):
-- Redes / otros:
+- Demo / sitio web: https://aura-vision-website.vercel.app/
+- Repositorio (GitHub): https://github.com/Volkergz/AuraVision_website
+- Redes / otros: _(por completar)_
 
 ## 13. Referencias (formato APA)
 

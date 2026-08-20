@@ -61,6 +61,7 @@ const titleId = `${id}-title`;
     width: 100%;
     background: transparent;
     color: var(--white);
+    overflow: visible;
   }
 
   .modal::backdrop {
@@ -78,6 +79,27 @@ const titleId = `${id}-title`;
     padding: 2rem 2rem 2.25rem;
     max-height: 80vh;
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--aura-purple-dark) transparent;
+  }
+
+  .modal__box::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .modal__box::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: var(--radius-lg);
+  }
+
+  .modal__box::-webkit-scrollbar-thumb {
+    background: var(--aura-purple-dark);
+    border-radius: 6px;
+    border: 2px solid var(--surface-card);
+  }
+
+  .modal__box::-webkit-scrollbar-thumb:hover {
+    background: var(--aura-purple);
   }
 
   .modal__close {

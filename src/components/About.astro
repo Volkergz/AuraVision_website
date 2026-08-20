@@ -42,18 +42,6 @@ const { about } = siteConfig;
       }
     </div>
 
-    <h3 class="about__block-title">Tecnologías principales</h3>
-    <div class="about__grid about__grid--tech">
-      {
-        about.technologies.map((tech) => (
-          <article class="aura-card">
-            <h4 class="about__tech-name">{tech.name}</h4>
-            <p>{tech.detail}</p>
-          </article>
-        ))
-      }
-    </div>
-
     <h3 class="about__block-title">Impacto esperado</h3>
     <div class="about__impact">
       <div class="aura-card">
@@ -130,10 +118,6 @@ const { about } = siteConfig;
   .about__block-title {
     margin-top: var(--gap-lg);
     margin-bottom: var(--gap-md);
-  }
-
-  .about__tech-name {
-    color: var(--aura-purple-light);
   }
 
   .about__impact {
