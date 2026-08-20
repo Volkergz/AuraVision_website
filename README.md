@@ -22,6 +22,7 @@ npm install        # instalar dependencias
 npm run dev        # servidor de desarrollo (http://localhost:4321)
 npm run build      # build de producción (genera la carpeta dist/)
 npm run preview    # previsualizar el build de producción
+npm run optimize:images   # convierte/optimiza las imágenes a WebP (scripts/optimize-images.mjs)
 ```
 
 > Verificación obligatoria tras cualquier cambio: `npm run build` debe pasar sin errores.
@@ -33,7 +34,7 @@ Docs/                       # Documentación del proyecto
 src/
   config/
     site.config.ts          # ÚNICA fuente de contenido editable
-  components/               # Navbar, Hero, About, Timeline, Events, Collaborators, Contact, Footer, Modal, Imagotipo, Icon
+  components/               # Navbar, Hero, About, Timeline, Collaborators, Contact, Footer, Modal, Imagotipo, Icon
   layouts/
     BaseLayout.astro
   pages/
@@ -71,13 +72,18 @@ sobrescribir el archivo con el mismo nombre** (no hace falta cambiar el código)
 
 | Imagen                 | Ruta                                                   |
 | ---------------------- | ------------------------------------------------------ |
-| Isotipo                | `public/images/isotipo.png`                            |
-| Colaborador Haleym     | `public/images/colaboradores/haleym.png`               |
-| Colaborador Angel      | `public/images/colaboradores/angel.jpeg`               |
-| Colaborador Aaron      | `public/images/colaboradores/aaron.jpeg`               |
-| Colaboradora Priscilla | `public/images/colaboradores/priscilla.jpeg`           |
-| Colaborador Osnellys   | `public/images/colaboradores/osnellys.jpeg`            |
-| Hitos (cronología)     | `public/images/hitos/hito-N-img-M.jpg` (ej. `hito-2-img-1.jpg`) |
+| Isotipo                | `public/images/isotipo.webp`                           |
+| Colaborador Haleym     | `public/images/colaboradores/haleym.webp`              |
+| Colaborador Angel      | `public/images/colaboradores/angel.webp`               |
+| Colaborador Aaron      | `public/images/colaboradores/aaron.webp`               |
+| Colaboradora Priscilla | `public/images/colaboradores/priscilla.webp`           |
+| Colaborador Osnellys   | `public/images/colaboradores/osnellys.webp`            |
+| Hitos (cronología)     | `public/images/hitos/hito-N-img-M.webp` (ej. `hito-2-img-1.webp`) |
+
+> Todas las imágenes se sirven en **WebP** para un peso mínimo. Para optimizar o re-optimizar las
+> imágenes (por ejemplo tras reemplazar una foto), ejecuta `npm run optimize:images`. El script
+> redimensiona a los tamaños máximos (hitos 1600px, colaboradores 256px), genera los `.webp` en
+> `public/images/` y es idempotente (solo crea los que falten).
 
 ### Fuente Neuropolitical
 
